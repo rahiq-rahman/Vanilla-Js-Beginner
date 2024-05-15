@@ -1,20 +1,32 @@
-const decreaseButton = document.querySelector('.decrease');
-const increaseButton = document.querySelector('.increase');
-const resetButton = document.querySelector('.reset');
+const buttons = document.querySelectorAll('.button');
+
 const count = document.querySelector('.count');
+//intial count
 let currentCount = 0;
 
-decreaseButton.addEventListener('click',function(){
-    currentCount--;
-    count.innerHTML = currentCount;
-})
+buttons.forEach(function(btn){
+    btn.addEventListener('click',function(e){
+        const styles = e.currentTarget.classList;
 
-increaseButton.addEventListener('click',function(){
-    currentCount++;
-    count.innerHTML = currentCount;
-})
+        if(styles.contains('decrease')){
+            currentCount--;
+        }
+        else if(styles.contains('increase')){
+            currentCount++;
+        }
+        else{
+            currentCount = 0;
+        }
 
-resetButton.addEventListener('click',function(){
-    currentCount = 0;
-    count.innerHTML = currentCount;
+        if(currentCount > 0){
+            count.style.color = 'green';
+        }
+        else if(currentCount < 0){
+            count.style.color = 'red';
+        }
+        else
+            count.style.color = 'black';
+
+        count.innerHTML = currentCount;
+    })
 })
